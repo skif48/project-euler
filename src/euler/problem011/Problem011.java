@@ -1,5 +1,7 @@
 package euler.problem011;
 
+import euler.common.Direction;
+import euler.common.Point;
 import euler.common.Problem;
 
 import java.util.ArrayList;

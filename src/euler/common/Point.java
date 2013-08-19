@@ -1,4 +1,4 @@
-package euler.problem011;
+package euler.common;
 
 public class Point {
 
