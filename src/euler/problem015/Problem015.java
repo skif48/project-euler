@@ -15,14 +15,30 @@ public class Problem015 implements Problem {
 
     public Problem015(final long size) {
         this.size = size;
-
     }
 
     @Override
     public long solve() {
-        //this.points = new ArrayList<Point>();
-        //this.points.add(new Point(0, 0));
-        return 0;
+        List<Point> points = new ArrayList<Point>();
+        points.add(new Point(0, 0));
+
+        while (true) {
+            final List<Point> newPoints = calculateNewPoints(points);
+            System.out.println(newPoints.size());
+
+            final Point firstPoint = newPoints.get(0);
+            System.out.println(firstPoint);
+
+            if (isFinishPoint(firstPoint)) {
+                return newPoints.size();
+            }
+
+            points = newPoints;
+        }
+    }
+
+    private boolean isFinishPoint(final Point point) {
+        return point.x == this.size - 1 && point.y == this.size - 1;
     }
 
     private List<Point> calculateNewPoints(final List<Point> points) {
@@ -38,11 +54,24 @@ public class Problem015 implements Problem {
     }
 
     private List<Point> calculateNewPointsFromCurrent(final Point current) {
-        return null;  //To change body of created methods use File | Settings | File Templates.
+        final List<Point> points = new ArrayList<Point>();
+
+        for (final Direction direction : DIRECTIONS) {
+            final int y = current.y + direction.dy;
+            final int x = current.x + direction.dx;
+
+            final Point newPoint = new Point(x, y);
+
+            if (isValid(newPoint)) {
+                points.add(newPoint);
+            }
+        }
+
+        return points;
     }
 
     private boolean isValid(final Point point) {
-        return point.x >= 0 && point.x < size && point.y >= 0 && point.y < size;
+        return point.x >= 0 && point.x < this.size && point.y >= 0 && point.y < this.size;
     }
 
 }
