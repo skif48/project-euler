@@ -1,15 +1,11 @@
 package euler.problem015;
 
-import euler.common.Direction;
-import euler.common.Point;
+import euler.common.NumericTools;
 import euler.common.Problem;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigInteger;
 
 public class Problem015 implements Problem {
-
-    private static final Direction[] DIRECTIONS = {Direction.RIGHT, Direction.DOWN};
 
     private final long size;
 
@@ -19,59 +15,14 @@ public class Problem015 implements Problem {
 
     @Override
     public long solve() {
-        List<Point> points = new ArrayList<Point>();
-        points.add(new Point(0, 0));
+        final BigInteger factorialFromSize = NumericTools.factorial(this.size);
+        final BigInteger square = factorialFromSize.multiply(factorialFromSize);
 
-        while (true) {
-            final List<Point> newPoints = calculateNewPoints(points);
-            System.out.println(newPoints.size());
+        final BigInteger factorialFromDoubleSize = NumericTools.factorial(this.size * 2);
 
-            final Point firstPoint = newPoints.get(0);
-            System.out.println(firstPoint);
+        final BigInteger routeCount = factorialFromDoubleSize.divide(square);
 
-            if (isFinishPoint(firstPoint)) {
-                return newPoints.size();
-            }
-
-            points = newPoints;
-        }
-    }
-
-    private boolean isFinishPoint(final Point point) {
-        return point.x == this.size - 1 && point.y == this.size - 1;
-    }
-
-    private List<Point> calculateNewPoints(final List<Point> points) {
-        final List<Point> newPoints = new ArrayList<Point>();
-
-        for (final Point current : points) {
-            List<Point> newPointsFromCurrent = calculateNewPointsFromCurrent(current);
-
-            newPoints.addAll(newPointsFromCurrent);
-        }
-
-        return newPoints;
-    }
-
-    private List<Point> calculateNewPointsFromCurrent(final Point current) {
-        final List<Point> points = new ArrayList<Point>();
-
-        for (final Direction direction : DIRECTIONS) {
-            final int y = current.y + direction.dy;
-            final int x = current.x + direction.dx;
-
-            final Point newPoint = new Point(x, y);
-
-            if (isValid(newPoint)) {
-                points.add(newPoint);
-            }
-        }
-
-        return points;
-    }
-
-    private boolean isValid(final Point point) {
-        return point.x >= 0 && point.x < this.size && point.y >= 0 && point.y < this.size;
+        return routeCount.longValue();
     }
 
 }

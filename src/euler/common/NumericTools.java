@@ -1,9 +1,20 @@
 package euler.common;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
 public final class NumericTools {
+
+    public static BigInteger factorial(final long number) {
+        BigInteger factorial = BigInteger.ONE;
+
+        for (long current = 1; current <= number; ++current) {
+            factorial = factorial.multiply(BigInteger.valueOf(current));
+        }
+
+        return factorial;
+    }
 
     public static boolean isPalindrome(final int candidate) {
         final char[] chars = String.valueOf(candidate).toCharArray();
