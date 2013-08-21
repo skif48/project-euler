@@ -44,9 +44,7 @@ public class RouteGeneratorTest {
         int index = 0;
 
         for (final byte element : elements) {
-            Assert.assertEquals(route[index], element);
-
-            ++index;
+            Assert.assertEquals(route[index++], element);
         }
 
     }

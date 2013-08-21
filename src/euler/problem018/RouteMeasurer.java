@@ -16,9 +16,9 @@ public class RouteMeasurer {
         final int[] measures = new int[route.length + 1];
         measures[0] = this.data[0][0];
 
-        for (int row = 1; row < data.length; ++row) {
-            final byte value = this.data[row][route[row - 1]];
-            measures[row] = measures[row - 1] + value;
+        for (int index = 1; index < data.length; ++index) {
+            final byte value = this.data[index][route[index - 1]];
+            measures[index] = measures[index - 1] + value;
         }
 
         return measures[measures.length - 1];

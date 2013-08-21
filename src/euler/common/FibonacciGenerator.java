@@ -16,11 +16,7 @@ public class FibonacciGenerator {
     public int next() {
 
         if (this.index < 2) {
-            final int result = this.index;
-
-            ++this.index;
-
-            return result;
+            return this.index++;
         }
 
         final int current = this.first + this.second;

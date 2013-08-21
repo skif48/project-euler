@@ -9,11 +9,7 @@ public class RouteTools {
         int index = 0;
 
         for(final byte element : route) {
-            offset += element;
-
-            result[index] = offset;
-
-            ++index;
+            result[index++] = (offset += element);
         }
 
         return result;
