@@ -36,12 +36,12 @@ public class Problem021 implements Problem {
         final Map<Long, Long> numberToSum = new HashMap<Long, Long>();
 
         for (long number = 1; number < 10000; ++number) {
-            final List<Long> divisors = NumericTools.findDivisors(number);
+            final List<Long> divisors = NumericTools.findProperDivisors(number);
 
             long sum = 0;
 
-            for (int index = 0; index < divisors.size() - 1; ++index) {
-                sum += divisors.get(index);
+            for (long divisor : divisors) {
+                sum += divisor;
             }
 
             numberToSum.put(number, sum);

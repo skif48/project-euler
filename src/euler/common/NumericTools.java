@@ -32,17 +32,27 @@ public final class NumericTools {
         return true;
     }
 
-    public static List<Long> findDivisors(final long number) {
-        final List<Long> factors = new ArrayList<Long>();
+    public static List<Long> findProperDivisors(final long number) {
+        final List<Long> divisors = new ArrayList<Long>();
 
-        for (long candidate = 1; candidate <= number; ++candidate) {
+        final int incrementer = number % 2 == 0 ? 1 : 2;
+
+        for (long candidate = 1; candidate <= number / 2; candidate += incrementer) {
 
             if (number % candidate == 0) {
-                factors.add(candidate);
+                divisors.add(candidate);
             }
         }
 
-        return factors;
+        return divisors;
+    }
+
+    public static List<Long> findDivisors(final long number) {
+        final List<Long> divisors = findProperDivisors(number);
+
+        divisors.add(number);
+
+        return divisors;
     }
 
     public static int countDivisors(final long number) {
