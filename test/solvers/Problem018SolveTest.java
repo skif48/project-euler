@@ -1,4 +1,4 @@
-package fast.problems.problem018;
+package solvers;
 
 import euler.problem018.Problem018;
 import org.junit.Assert;
