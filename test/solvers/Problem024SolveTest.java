@@ -1,10 +1,10 @@
-package fast.problems.problem024;
+package solvers;
 
 import euler.problem024.Problem024;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class Problem024Test {
+public class Problem024SolveTest {
 
     @Test
     public void smoke() {

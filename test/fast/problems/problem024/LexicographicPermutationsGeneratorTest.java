@@ -16,18 +16,24 @@ public class LexicographicPermutationsGeneratorTest {
         Assert.assertEquals(120, generator.next());
         Assert.assertEquals(201, generator.next());
         Assert.assertEquals(210, generator.next());
+
+        Assert.assertEquals(-1, generator.next());
     }
 
-    /*
-    0123456789
-    0123456798
-    0123456879
-    0123456897
-    0123456978
-    0123456987
-    0123457689
-    0123457698
-    0123457869
-    0123457896
-     */
+    @Test
+    public void generateFromTenDigits() {
+        final LexicographicPermutationsGenerator generator = new LexicographicPermutationsGenerator(10);
+
+        Assert.assertEquals(123456789L, generator.next());
+        Assert.assertEquals(123456798L, generator.next());
+        Assert.assertEquals(123456879L, generator.next());
+        Assert.assertEquals(123456897L, generator.next());
+        Assert.assertEquals(123456978L, generator.next());
+        Assert.assertEquals(123456987L, generator.next());
+        Assert.assertEquals(123457689L, generator.next());
+        Assert.assertEquals(123457698L, generator.next());
+        Assert.assertEquals(123457869L, generator.next());
+        Assert.assertEquals(123457896L, generator.next());
+    }
+
 }

@@ -2,110 +2,81 @@ package euler.problem024;
 
 public class LexicographicPermutationsGenerator {
 
-    private final int size;
-
+    private int[] permutation;
     private boolean finished;
 
-    private int keyIndex;
-    private int keyDigit;
-
-    private int[] digits;
-
     public LexicographicPermutationsGenerator(final int size) {
-        this.size = size;
+        this.permutation = new int[size];
+
+        for (int index = 0; index < size; ++index) {
+            this.permutation[index] = index;
+        }
 
         this.finished = false;
-        this.keyIndex = this.size - 1;
-        this.keyDigit = this.size - 1;
-
-        startNewPermutation();
     }
 
-    public int next() {
+    public long next() {
 
         if (this.finished) {
             return -1;
         }
 
-        final int result = digitsToInteger();
+        final long result = permutationToInteger();
 
-        prepareNextResult();
+        prepareNext();
 
         return result;
     }
 
-    private void prepareNextResult() {
+    private void prepareNext() {
+        int first = this.permutation.length - 2;
 
-        for (int current = this.keyIndex; current < this.digits.length - 1; ++current) {
-            final int currentValue = this.digits[current];
-            final int nextValue = this.digits[current + 1];
-
-            if (nextValue > currentValue) {
-                swap(current, current + 1);
-
-                return;
-            }
+        while (first >= 0 && this.permutation[first] > this.permutation[first + 1]) {
+            --first;
         }
 
-        if (this.keyIndex == 0) {
-            this.keyIndex = this.size - 1;
-            this.keyDigit--;
-        } else {
-            --this.keyIndex;
-        }
-
-        if (this.keyDigit < 0) {
+        if (first < 0) {
             this.finished = true;
-        } else {
-            startNewPermutation();
-        }
 
-    }
-
-    private void startNewPermutation() {
-        this.digits = new int[this.size];
-
-        int value = 0;
-
-        for (int current = 0; current <= this.size - 1; ++current) {
-
-            if (value == this.keyDigit) {
-                ++value;
-            }
-
-            if (current == this.keyIndex) {
-                this.digits[current] = this.keyDigit;
-            } else {
-                this.digits[current] = value++;
-            }
-        }
-        /*
-        System.arraycopy(this.base, 0, this.digits, 0, this.base.length);
-
-        final int indexToSwap = this.keyIndex + 1;
-
-        if (indexToSwap >= this.base.length) {
             return;
         }
 
-        swap(this.keyIndex, indexToSwap);
-        */
+        int second = this.permutation.length - 1;
+
+        while (second >= 0 && this.permutation[first] > this.permutation[second]) {
+            --second;
+        }
+
+        swap(first, second);
+        reverse(first + 1, this.permutation.length - 1);
     }
 
     private void swap(final int first, final int second) {
-        final int glass = this.digits[first];
-        this.digits[first] = this.digits[second];
-        this.digits[second] = glass;
+        final int glass = this.permutation[first];
+        this.permutation[first] = this.permutation[second];
+        this.permutation[second] = glass;
     }
 
-    private int digitsToInteger() {
+    private void reverse(final int from, final int to) {
+        int first = from;
+        int second = to;
+
+        while (second - first >= 1) {
+            swap(first, second);
+
+            ++first;
+            --second;
+        }
+    }
+
+    private long permutationToInteger() {
         final StringBuffer buffer = new StringBuffer();
 
-        for (final int digit : this.digits) {
+        for (final int digit : this.permutation) {
             buffer.append(digit);
         }
 
-        return Integer.valueOf(buffer.toString());
+        return Long.valueOf(buffer.toString());
     }
 
 }

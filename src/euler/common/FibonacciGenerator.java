@@ -1,25 +1,27 @@
 package euler.common;
 
+import java.math.BigInteger;
+
 public class FibonacciGenerator {
 
     private int index;
-    private int first;
-    private int second;
+    private BigInteger first;
+    private BigInteger second;
 
     public FibonacciGenerator() {
         this.index = 0;
 
-        this.first = 0;
-        this.second = 1;
+        this.first = BigInteger.ZERO;
+        this.second = BigInteger.ONE;
     }
 
-    public int next() {
+    public BigInteger next() {
 
         if (this.index < 2) {
-            return this.index++;
+            return BigInteger.valueOf(this.index++);
         }
 
-        final int current = this.first + this.second;
+        final BigInteger current = this.first.add(this.second);
 
         this.first = this.second;
         this.second = current;

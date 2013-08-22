@@ -22,7 +22,7 @@ public class Problem002 implements Problem {
             generator.next();
             generator.next();
 
-            int even = generator.next();
+            int even = generator.next().intValue();
 
             if (even >= this.upperLimit) {
                 break;
